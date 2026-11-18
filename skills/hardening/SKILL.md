@@ -1,6 +1,6 @@
 ---
 name: hardening
-description: Turn a Tiny Tapeout design into a chip layout (GDS) and get it to pass - harden locally with LibreLane through tt-support-tools, read utilisation, timing and warnings, fix placement, routing and timing failures, and diagnose a failing `gds`, `precheck` or `viewer` job. Use it whenever a Tiny Tapeout project (a tt_um_* module) must be hardened, the `gds` workflow fails or takes very long, someone asks whether a design fits its tiles or meets its clock, or before submitting to a shuttle.
+description: Turn a Tiny Tapeout design into a chip layout (GDS) and get it to pass - harden locally with LibreLane through tt-support-tools, read utilisation, timing and warnings, fix placement, routing and timing failures in the design, and diagnose a failing `gds`, `precheck` or `viewer` job without touching the workflows or checks, since the Tiny Tapeout precheck is mandatory. Use it whenever a Tiny Tapeout project (a tt_um_* module) must be hardened, the `gds` workflow fails or takes very long, someone asks whether a design fits its tiles or meets its clock, or before submitting to a shuttle.
 ---
 
 # Harden a Tiny Tapeout design
@@ -69,6 +69,13 @@ after.
 
 ## A failing GitHub job
 
+**Fix the design, never the checks.** The Tiny Tapeout precheck is mandatory: a project is only
+accepted on a shuttle if the template's workflows pass as the template ships them. So keep
+`.github/workflows/` exactly as the template has it: do not disable, skip or edit jobs, change the
+`tt-gds-action` reference, or edit DRC decks, precheck rules, tech files or tool versions to get a
+check through. A layout that passes only because a check was weakened is rejected at submission,
+or worse, gets made and does not work. If a check looks wrong, ask in the Discord (below) instead.
+
 The run's summary page has the linter output, synthesis warnings, routing stats and cell usage.
 
 - **`viewer` or pages fails:** set Settings, Pages, Source to "GitHub Actions". If the GDS was
@@ -76,7 +83,7 @@ The run's summary page has the linter output, synthesis warnings, routing stats 
   job fails with "Multiple artifacts named github-pages".
 - **`precheck` fails:** the layout breaks a manufacturing rule; the job log names the check. For
   a plain Verilog project this is rare and usually means `src/config.json` or the workflow was
-  edited.
+  edited. Analog projects: see the `analog` skill, which also runs the precheck locally.
 - **`gl_test` fails:** see the gate-level section of the `testing` skill.
 - **Submission asks to re-harden for another PDK:** the project was built for a different PDK
   than the shuttle (see the `project-setup` skill).
