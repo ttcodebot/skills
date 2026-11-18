@@ -27,6 +27,8 @@ python -m cocotb_tools.check_results results.xml
 - Check the outputs right after reset too: a register without reset starts as X at gate level.
 - `uio_oe` says which bidirectional pins the design drives; check it when the design uses them.
 - For VGA output, render frames instead of asserting on pins (see the `vga-output` skill).
+- An analog top has no gate-level netlist to test; test its digital blocks on their own and
+  simulate the rest with ngspice (see the `mixed-signal` skill).
 
 ## Gate-level test
 

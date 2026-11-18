@@ -19,9 +19,12 @@ Each shuttle is made in one PDK. Start from the template for that PDK (GitHub: "
 | IHP 130 nm             | [ttihp-verilog-template](https://github.com/TinyTapeout/ttihp-verilog-template) |
 
 Each template's `.github/workflows/gds.yaml` pins `TinyTapeout/tt-gds-action@<shuttle>`; it must
-name the shuttle the project goes to. A project made for one PDK has to be hardened again for
-another: copy the sources into the other template rather than editing the workflow by hand.
+name the shuttle the project goes to. Otherwise keep the template's workflows exactly as they are:
+they run the mandatory precheck (see the `hardening` skill). A project made for one PDK has to be
+hardened again for another: copy the sources into the other template rather than editing the
+workflow by hand.
 For gate-level designs drawn in the browser, the matching `*-wokwi-template` repositories exist.
+For analog or hand-drawn layout, use the `*-analog-template` repositories (see the `analog` skill).
 
 ## The top module
 
