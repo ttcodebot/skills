@@ -1,0 +1,19 @@
+name: check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v10.3.3
+
+      - name: Skill headers and ASCII
+        run: uv run scripts/check_skills.py
+
+      - name: Pin tables match pinouts.yaml
+        run: uv run scripts/render_pinouts.py --check

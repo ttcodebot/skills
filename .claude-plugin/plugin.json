@@ -1,0 +1,22 @@
+{
+  "name": "tinytapeout",
+  "description": "Agent skills for designing Tiny Tapeout chips: project setup, pinouts, testing, hardening and VGA output.",
+  "author": {
+    "name": "Tiny Tapeout",
+    "url": "https://tinytapeout.com"
+  },
+  "homepage": "https://tinytapeout.com",
+  "repository": "https://github.com/TinyTapeout/skills",
+  "keywords": [
+    "tinytapeout",
+    "asic",
+    "verilog",
+    "cocotb",
+    "librelane",
+    "pmod",
+    "pinout",
+    "vga",
+    "chip-design"
+  ],
+  "license": "Apache-2.0"
+}

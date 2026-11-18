@@ -1,0 +1,120 @@
+# Common pinouts for Tiny Tapeout projects.
+#
+# Source of truth for the pin tables in skills/pinout/SKILL.md.
+# After editing, run: uv run scripts/render_pinouts.py
+#
+# pins: project pin -> signal name, from the chip's point of view.
+# dir:  uio pins only: out (chip drives), in (chip reads) or inout.
+
+peripherals:
+  - name: Tiny VGA Pmod
+    url: https://github.com/mole99/tiny-vga
+    pins:
+      uo[0]: R1
+      uo[1]: G1
+      uo[2]: B1
+      uo[3]: VSYNC
+      uo[4]: R0
+      uo[5]: G0
+      uo[6]: B0
+      uo[7]: HSYNC
+
+  - name: 7-segment display (on the demoboard)
+    pins:
+      uo[0]: A
+      uo[1]: B
+      uo[2]: C
+      uo[3]: D
+      uo[4]: E
+      uo[5]: F
+      uo[6]: G
+      uo[7]: DP
+
+  - name: Dual 7-segment Pmod
+    url: https://store.tinytapeout.com/products/Dual-7-segment-Pmod-p855703769
+    pins:
+      uo[0]: A
+      uo[1]: B
+      uo[2]: C
+      uo[3]: D
+      uo[4]: E
+      uo[5]: F
+      uo[6]: G
+      uo[7]: SEL
+
+  - name: Gamepad Pmod
+    url: https://github.com/psychogenic/gamepad-pmod
+    pins:
+      ui[4]: LATCH
+      ui[5]: CLK
+      ui[6]: DATA
+
+  - name: Rotary encoder Pmod
+    url: https://store.tinytapeout.com/products/Rotary-Pmod-p869430819
+    pins:
+      ui[0]: A
+      ui[1]: B
+      ui[2]: SW
+
+  - name: QSPI Pmod (flash + 2 PSRAM)
+    url: https://github.com/mole99/qspi-pmod
+    pins:
+      uio[0]: CS0 flash
+      uio[1]: SD0 / MOSI
+      uio[2]: SD1 / MISO
+      uio[3]: SCK
+      uio[4]: SD2
+      uio[5]: SD3
+      uio[6]: CS1 RAM A
+      uio[7]: CS2 RAM B
+    dir:
+      uio[0]: out
+      uio[1]: inout
+      uio[2]: inout
+      uio[3]: out
+      uio[4]: inout
+      uio[5]: inout
+      uio[6]: out
+      uio[7]: out
+
+  - name: SPI, chip as controller
+    pins:
+      uio[0]: CS
+      uio[1]: MOSI
+      uio[2]: MISO
+      uio[3]: SCK
+    dir:
+      uio[0]: out
+      uio[1]: out
+      uio[2]: in
+      uio[3]: out
+
+  - name: Audio Pmod
+    url: https://github.com/MichaelBell/tt-audio-pmod
+    pins:
+      uio[7]: AUDIO
+    dir:
+      uio[7]: out
+
+  - name: Audio Pmod (on uo)
+    url: https://github.com/MichaelBell/tt-audio-pmod
+    pins:
+      uo[7]: AUDIO
+
+  - name: UART
+    pins:
+      ui[3]: RX
+      uo[4]: TX
+
+  - name: UART (alternative)
+    pins:
+      ui[1]: RX
+      uo[0]: TX
+
+  - name: UART (on uio)
+    pins:
+      uio[1]: RX
+      uio[2]: TX
+    dir:
+      uio[1]: in
+      uio[2]: out

@@ -1,0 +1,15 @@
+{
+  "name": "tinytapeout-skills",
+  "description": "Agent skills from Tiny Tapeout for designing chips on its shared shuttles.",
+  "owner": {
+    "name": "Tiny Tapeout",
+    "url": "https://tinytapeout.com"
+  },
+  "plugins": [
+    {
+      "name": "tinytapeout",
+      "source": "./",
+      "description": "Project setup, pinouts, testing, hardening and VGA output for Tiny Tapeout designs."
+    }
+  ]
+}
