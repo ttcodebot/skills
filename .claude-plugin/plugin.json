@@ -1,6 +1,6 @@
 {
   "name": "tinytapeout",
-  "description": "Agent skills for designing Tiny Tapeout chips: project setup, pinouts, testing, hardening, VGA output, analog and mixed-signal.",
+  "description": "Agent skills for designing Tiny Tapeout chips: project setup, pinouts, testing, hardening, VGA output, analog, analog simulation and mixed-signal.",
   "author": {
     "name": "Tiny Tapeout",
     "url": "https://tinytapeout.com"
@@ -19,6 +19,7 @@
     "chip-design",
     "analog",
     "mixed-signal",
+    "ngspice",
     "xschem",
     "magic",
     "klayout"

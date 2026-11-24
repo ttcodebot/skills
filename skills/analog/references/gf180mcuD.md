@@ -31,16 +31,16 @@ precheck. Every other rule counts.
 
 ## Rules that bite
 
-| Rule                      | Value                                                                                           |
-| ------------------------- | ----------------------------------------------------------------------------------------------- |
-| Manufacturing grid        | 5 nm: every vertex, on every layer (`*_OFFGRID`)                                                |
-| Contact (`CO.1`)          | exactly 0.22 x 0.22 um                                                                          |
-| Via1 to Via3 (`V1.1`...)  | exactly 0.26 x 0.26 um                                                                          |
-| Wide metal (`MSLOT.1`)    | solid metal wider than 30 um in both directions needs slots; one slot direction is enough      |
-| Routing metals            | Metal1 to Metal4. Metal5 is forbidden; power stripes and pins are on Metal4                     |
-| Power stripe width        | at least 0.8 um (precheck); the init script draws 2 um                                          |
-| Pin labels                | `Metal4_Label` (46/10) over the Metal4 pin shape, in the top cell                               |
-| Boundary                  | a `PR_bndry` rectangle covering exactly the frame's die area                                    |
+| Rule                     | Value                                                                                     |
+| ------------------------ | ----------------------------------------------------------------------------------------- |
+| Manufacturing grid       | 5 nm: every vertex, on every layer (`*_OFFGRID`)                                          |
+| Contact (`CO.1`)         | exactly 0.22 x 0.22 um                                                                    |
+| Via1 to Via3 (`V1.1`...) | exactly 0.26 x 0.26 um                                                                    |
+| Wide metal (`MSLOT.1`)   | solid metal wider than 30 um in both directions needs slots; one slot direction is enough |
+| Routing metals           | Metal1 to Metal4. Metal5 is forbidden; power stripes and pins are on Metal4               |
+| Power stripe width       | at least 0.8 um (precheck); the init script draws 2 um                                    |
+| Pin labels               | `Metal4_Label` (46/10) over the Metal4 pin shape, in the top cell                         |
+| Boundary                 | a `PR_bndry` rectangle covering exactly the frame's die area                              |
 
 Cuts are fixed-size, not minimum-size: never scale a cut. A design scaled from a 130 nm PDK
 (for example by 1.45) lands vertices on a 1 nm grid and turns contacts into 0.232 um squares.
@@ -58,6 +58,9 @@ unit has made magic fail to recognise PDK standard cells and flatten them, which
   `pfet_06v0` (or `*_05v0`), drawn with the MV layers in magic.
 - Never drive a gate in the VAPWR domain straight from 3.3 V logic: put a level shifter between
   them (a 3.3 V inverter driving a cross-coupled latch on VAPWR).
+- No MIM capacitors: the precheck runs MIM option B on five metal layers, whose top plate is
+  Metal5, and Metal5 is forbidden. Build large capacitors from MOS gates, small ones from metal
+  fingers (MOM).
 - Poly resistor `ppolyf_u_1k`: 1 kOhm per square nominal in the models. Build ratios from one unit
   resistor in series and parallel, not from differently sized ones.
 - Models for ngspice: `.include $PDK_ROOT/gf180mcuD/libs.tech/ngspice/design.ngspice` and
@@ -81,10 +84,10 @@ to the netgen source side.
 
 Working gf180mcuD analog projects with their full flow committed:
 
-| Project                                                                            | Shows                                                                     |
-| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [tt_tnt_gf_555](https://github.com/smunaut/tt_tnt_gf_555)                          | magic + xschem harness (`mag/Makefile`, `mag/tcl/`): DRC, LVS, PEX, export |
-| [ttgf_analog_factory_test](https://github.com/smunaut/ttgf_analog_factory_test)    | VAPWR design, level shifter, rail sense lines                              |
-| [gf-r2r-dac](https://github.com/mattvenn/gf-r2r-dac)                               | LibreLane digital block + hand-drawn R-2R (see the `mixed-signal` skill)   |
-| [ttgf0p3-momcap](https://github.com/htfab/ttgf0p3-momcap)                          | metal-only MOM capacitor generated from Python                             |
-| [ttgf0p3-submission](https://github.com/christoph-weiser/ttgf0p3-submission)       | OTA test buffer with a specification table in `docs/info.md`               |
+| Project                                                                         | Shows                                                                      |
+| ------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| [tt_tnt_gf_555](https://github.com/smunaut/tt_tnt_gf_555)                       | magic + xschem harness (`mag/Makefile`, `mag/tcl/`): DRC, LVS, PEX, export |
+| [ttgf_analog_factory_test](https://github.com/smunaut/ttgf_analog_factory_test) | VAPWR design, level shifter, rail sense lines                              |
+| [gf-r2r-dac](https://github.com/mattvenn/gf-r2r-dac)                            | LibreLane digital block + hand-drawn R-2R (see the `mixed-signal` skill)   |
+| [ttgf0p3-momcap](https://github.com/htfab/ttgf0p3-momcap)                       | metal-only MOM capacitor generated from Python                             |
+| [ttgf0p3-submission](https://github.com/christoph-weiser/ttgf0p3-submission)    | OTA test buffer with a specification table in `docs/info.md`               |

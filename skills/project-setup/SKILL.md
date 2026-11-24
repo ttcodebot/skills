@@ -60,6 +60,10 @@ The comments in the template's `info.yaml` cover the other fields.
 This becomes the project's page in the chip's datasheet. Write **How to test** for someone holding
 a demoboard: which inputs to set, which clock, and what they should see.
 
+The datasheet is read away from GitHub and cannot change after submission, so the page must
+stand alone: use absolute URLs for links, and only images committed in the repository (the
+datasheet build cannot load remote images, such as badges, and the `docs` job fails).
+
 ## Check before pushing
 
 With [tt-support-tools](https://github.com/TinyTapeout/tt-support-tools) cloned into `tt/` and its

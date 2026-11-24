@@ -13,15 +13,16 @@ chip before it's made. These skills fill that in.
 
 ## Skills
 
-| Skill                                            | Use it to                                                                                                                     |
-| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| [`project-setup`](skills/project-setup/SKILL.md) | Start a project: the template for the shuttle's PDK, the `tt_um_*` module, `info.yaml`, and the rules that differ from FPGAs |
-| [`pinout`](skills/pinout/SKILL.md)               | Assign pins the standard way: VGA, audio, gamepad, QSPI memory, 7-segment, rotary encoder, UART and SPI on the demoboard      |
-| [`testing`](skills/testing/SKILL.md)             | Write and run the cocotb tests, read failures, and run the same test on the gate-level netlist                                |
-| [`hardening`](skills/hardening/SKILL.md)         | Harden locally with LibreLane, read utilisation and timing, and fix a failing `gds` workflow                                  |
-| [`vga-output`](skills/vga-output/SKILL.md)       | Draw to a VGA monitor, with habits that held up on silicon, and check the picture with [tt-vga-sim](https://github.com/TinyTapeout/tt-vga-sim) |
-| [`analog`](skills/analog/SKILL.md)               | Analog and custom-layout projects: the frame, analog pins, xschem to GDS, and passing the precheck locally, with IIC-OSIC-TOOLS on any OS |
-| [`mixed-signal`](skills/mixed-signal/SKILL.md)   | Digital logic inside an analog project: a LibreLane macro or hand-placed cells, LVS of the mix, and ngspice + Verilator co-simulation |
+| Skill                                                    | Use it to                                                                                                                                      |
+| -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`project-setup`](skills/project-setup/SKILL.md)         | Start a project: the template for the shuttle's PDK, the `tt_um_*` module, `info.yaml`, and the rules that differ from FPGAs                   |
+| [`pinout`](skills/pinout/SKILL.md)                       | Assign pins the standard way: VGA, audio, gamepad, QSPI memory, 7-segment, rotary encoder, UART and SPI on the demoboard                       |
+| [`testing`](skills/testing/SKILL.md)                     | Write and run the cocotb tests, read failures, and run the same test on the gate-level netlist                                                 |
+| [`hardening`](skills/hardening/SKILL.md)                 | Harden locally with LibreLane, read utilisation and timing, and fix a failing `gds` workflow                                                   |
+| [`vga-output`](skills/vga-output/SKILL.md)               | Draw to a VGA monitor, with habits that held up on silicon, and check the picture with [tt-vga-sim](https://github.com/TinyTapeout/tt-vga-sim) |
+| [`analog`](skills/analog/SKILL.md)                       | Analog and custom-layout projects: the frame, analog pins, xschem to GDS, and passing the precheck locally, with IIC-OSIC-TOOLS on any OS      |
+| [`analog-simulation`](skills/analog-simulation/SKILL.md) | Simulate and verify analog blocks with xschem and ngspice: corners, Monte Carlo, supply and power-up sweeps, post-layout                       |
+| [`mixed-signal`](skills/mixed-signal/SKILL.md)           | Digital logic inside an analog project: a LibreLane macro or hand-placed cells, LVS of the mix, and ngspice + Verilator co-simulation          |
 
 ## Install
 

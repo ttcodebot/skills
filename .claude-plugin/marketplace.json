@@ -9,7 +9,7 @@
     {
       "name": "tinytapeout",
       "source": "./",
-      "description": "Project setup, pinouts, testing, hardening, VGA output, analog and mixed-signal for Tiny Tapeout designs."
+      "description": "Project setup, pinouts, testing, hardening, VGA output, analog, analog simulation and mixed-signal for Tiny Tapeout designs."
     }
   ]
 }

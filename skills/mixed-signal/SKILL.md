@@ -18,10 +18,10 @@ still applies in full.
 
 ## Pick how to build the digital part
 
-| Digital part                         | Build it as                                                                                |
-| ------------------------------------ | ------------------------------------------------------------------------------------------ |
-| A handful of gates or flip-flops     | Standard cells placed and wired by hand in magic (or placed from Python with gdstk)       |
-| Counters, FSMs, registers, a CPU     | A LibreLane macro, instanced in the analog top cell                                        |
+| Digital part                     | Build it as                                                                         |
+| -------------------------------- | ----------------------------------------------------------------------------------- |
+| A handful of gates or flip-flops | Standard cells placed and wired by hand in magic (or placed from Python with gdstk) |
+| Counters, FSMs, registers, a CPU | A LibreLane macro, instanced in the analog top cell                                 |
 
 Reference: [gf-r2r-dac](https://github.com/mattvenn/gf-r2r-dac) (gf180mcuD) hardens a sine and
 divider block with LibreLane and drives a hand-drawn R-2R ladder; its `openlane/`, `mag/`,
@@ -34,14 +34,14 @@ with cocotb like any design (see the `testing` skill), and harden it with the Li
 the shuttle uses (see the `hardening` skill for installing it). Use a `config.json`; Tcl configs
 are deprecated in LibreLane. Settings that matter for a block inside an analog layout:
 
-| Setting                                             | Why                                                                          |
-| --------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `FP_SIZING: "absolute"`, `DIE_AREA: [0, 0, w, h]`   | Leave the rest of the frame free for analog                                  |
-| `RT_MAX_LAYER`                                      | The project's top metal: `met4` (sky130A), `Metal4` (gf180mcuD, ihp-sg13cmos5l), `TopMetal1` (ihp-sg13g2) |
-| `PDN_MULTILAYER: false`                             | No core ring and no straps on the top layers; you connect the rails yourself |
-| `IO_PIN_ORDER_CFG`                                  | Put the outputs on the edge that faces the analog block                      |
-| `DESIGN_REPAIR_BUFFER_OUTPUT_PORTS: 0`              | No buffers on outputs that drive analog nodes                                |
-| `CLOCK_PORT`, `CLOCK_PERIOD`                        | As for any design                                                            |
+| Setting                                           | Why                                                                                                       |
+| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `FP_SIZING: "absolute"`, `DIE_AREA: [0, 0, w, h]` | Leave the rest of the frame free for analog                                                               |
+| `RT_MAX_LAYER`                                    | The project's top metal: `met4` (sky130A), `Metal4` (gf180mcuD, ihp-sg13cmos5l), `TopMetal1` (ihp-sg13g2) |
+| `PDN_MULTILAYER: false`                           | No core ring and no straps on the top layers; you connect the rails yourself                              |
+| `IO_PIN_ORDER_CFG`                                | Put the outputs on the edge that faces the analog block                                                   |
+| `DESIGN_REPAIR_BUFFER_OUTPUT_PORTS: 0`            | No buffers on outputs that drive analog nodes                                                             |
+| `CLOCK_PORT`, `CLOCK_PERIOD`                      | As for any design                                                                                         |
 
 Older configs use the names `DESIGN_IS_CORE`, `FP_PIN_ORDER_CFG` and
 `PL_RESIZER_BUFFER_OUTPUT_PORTS` for the same settings. When copying a config from another
@@ -132,3 +132,7 @@ example's 1.8 V `vcc` is a sky130 leftover in a gf180mcuD project).
 Everything in the `analog` skill applies unchanged, above all the precheck, which must pass with
 the template's workflows untouched. Also run the block's gate-level test (see the `testing` skill)
 on the netlist you placed.
+
+When a block's ports change, update `src/project.v`, the LVS source and any simulation stubs of
+the analog cells in the same commit: a stale stub passes every analog check and breaks the
+Verilog ones.
